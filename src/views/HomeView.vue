@@ -3,15 +3,15 @@
     <h1 class="title home-title">Список постів</h1>
     <PostsList
       ref="postsList"
-      @open-post="$emit('open-post', $event)"
-      @edit-post="$emit('edit-post', $event)"
+      @open-post="openPost"
+      @edit-post="editPost"
     />
 
     <Sidebar
       :is-open="isSidebarOpen"
       :post="selectedPost"
-      @close="$emit('close-sidebar')"
-      @post-updated="$emit('post-updated')"
+      @close="closeSidebar"
+      @post-updated="handlePostUpdate"
     />
   </div>
 </template>
@@ -31,37 +31,29 @@ export default {
     isSidebarOpen: Boolean,
     selectedPost: Object
   },
-  setup(props, { expose }) {
+  emits: ['open-post', 'edit-post', 'open-new-post', 'close-sidebar', 'post-updated'],
+  setup(props, { emit }) {
     const postsList = ref(null)
 
     const openPost = (post) => {
-      props.selectedPost = post
-      props.isSidebarOpen = true
+      emit('open-post', post)
     }
 
     const editPost = (post) => {
-      props.selectedPost = post
-      props.isSidebarOpen = true
+      emit('edit-post', post)
     }
 
     const openNewPost = () => {
-      props.selectedPost = null
-      props.isSidebarOpen = true
+      emit('open-new-post')
     }
 
     const closeSidebar = () => {
-      props.isSidebarOpen = false
-      props.selectedPost = null
+      emit('close-sidebar')
     }
 
     const handlePostUpdate = () => {
-      if (postsList.value) {
-        postsList.value.refreshPosts()
-      }
+      emit('post-updated')
     }
-
-    // Додаю можливість викликати openNewPost ззовні через ref
-    expose({ openNewPost })
 
     return {
       postsList,

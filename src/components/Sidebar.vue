@@ -54,54 +54,56 @@
                   Написати коментар
                 </button>
                 <div v-else class="comment-form">
-                  <div class="field">
-                    <label class="label">Ім'я</label>
-                    <div class="control">
-                      <input 
-                        v-model="commentForm.name" 
-                        class="input" 
-                        type="text" 
-                        placeholder="Ваше ім'я"
-                      >
+                  <form @submit.prevent="submitComment">
+                    <div class="field">
+                      <label class="label">Ім'я</label>
+                      <div class="control">
+                        <input 
+                          v-model="commentForm.name" 
+                          class="input" 
+                          type="text" 
+                          placeholder="Ваше ім'я"
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control">
-                      <input 
-                        v-model="commentForm.email" 
-                        class="input" 
-                        type="email" 
-                        placeholder="Ваш email"
-                      >
+                    <div class="field">
+                      <label class="label">Email</label>
+                      <div class="control">
+                        <input 
+                          v-model="commentForm.email" 
+                          class="input" 
+                          type="email" 
+                          placeholder="Ваш email"
+                        >
+                      </div>
                     </div>
-                  </div>
-                  <div class="field">
-                    <label class="label">Коментар</label>
-                    <div class="control">
-                      <textarea 
-                        v-model="commentForm.body" 
-                        class="textarea" 
-                        placeholder="Ваш коментар"
-                      ></textarea>
+                    <div class="field">
+                      <label class="label">Коментар</label>
+                      <div class="control">
+                        <textarea 
+                          v-model="commentForm.body" 
+                          class="textarea" 
+                          placeholder="Ваш коментар"
+                        ></textarea>
+                      </div>
                     </div>
-                  </div>
-                  <div class="field is-grouped">
-                    <div class="control">
-                      <button 
-                        class="button is-primary" 
-                        :class="{ 'is-loading': submitting }"
-                        @click="submitComment"
-                      >
-                        Відправити
-                      </button>
+                    <div class="field is-grouped">
+                      <div class="control">
+                        <button 
+                          class="button is-primary is-light" 
+                          :class="{ 'is-loading': submitting }"
+                          type="submit"
+                        >
+                          Відправити
+                        </button>
+                      </div>
+                      <div class="control">
+                        <button class="button is-light" type="button" @click="clearForm">
+                          Очистити
+                        </button>
+                      </div>
                     </div>
-                    <div class="control">
-                      <button class="button is-light" @click="clearForm">
-                        Очистити
-                      </button>
-                    </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </template>

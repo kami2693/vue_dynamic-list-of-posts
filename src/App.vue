@@ -105,6 +105,7 @@ export default {
     </main>
 
     <Sidebar
+      v-if="isAuth && $route.name !== 'login'"
       :is-open="isSidebarOpen"
       :post="selectedPost"
       @close="handleCloseSidebar"

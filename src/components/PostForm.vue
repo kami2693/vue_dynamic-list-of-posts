@@ -1,48 +1,50 @@
 <template>
   <div class="post-form">
-    <div class="field">
-      <label class="label">Заголовок</label>
-      <div class="control">
-        <input 
-          v-model="form.title" 
-          class="input" 
-          type="text" 
-          placeholder="Заголовок поста"
-          :class="{ 'is-danger': errors.title }"
-        >
-        <p v-if="errors.title" class="help is-danger">{{ errors.title }}</p>
+    <form @submit.prevent="submit">
+      <div class="field">
+        <label class="label">Заголовок</label>
+        <div class="control">
+          <input 
+            v-model="form.title" 
+            class="input" 
+            type="text" 
+            placeholder="Заголовок поста"
+            :class="{ 'is-danger': errors.title }"
+          >
+          <p v-if="errors.title" class="help is-danger">{{ errors.title }}</p>
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <label class="label">Текст</label>
-      <div class="control">
-        <textarea 
-          v-model="form.body" 
-          class="textarea" 
-          placeholder="Текст поста"
-          :class="{ 'is-danger': errors.body }"
-        ></textarea>
-        <p v-if="errors.body" class="help is-danger">{{ errors.body }}</p>
+      <div class="field">
+        <label class="label">Текст</label>
+        <div class="control">
+          <textarea 
+            v-model="form.body" 
+            class="textarea" 
+            placeholder="Текст поста"
+            :class="{ 'is-danger': errors.body }"
+          ></textarea>
+          <p v-if="errors.body" class="help is-danger">{{ errors.body }}</p>
+        </div>
       </div>
-    </div>
 
-    <div class="field is-grouped">
-      <div class="control">
-        <button 
-          class="button is-primary" 
-          :class="{ 'is-loading': submitting }"
-          @click="submit"
-        >
-          {{ isEdit ? 'Зберегти' : 'Створити' }}
-        </button>
+      <div class="field is-grouped">
+        <div class="control">
+          <button 
+            class="button is-primary" 
+            :class="{ 'is-loading': submitting }"
+            type="submit"
+          >
+            {{ isEdit ? 'Зберегти' : 'Створити' }}
+          </button>
+        </div>
+        <div class="control">
+          <button class="button is-light" type="button" @click="clearForm">
+            Очистити
+          </button>
+        </div>
       </div>
-      <div class="control">
-        <button class="button is-light" @click="clearForm">
-          Очистити
-        </button>
-      </div>
-    </div>
+    </form>
   </div>
 </template>
 
