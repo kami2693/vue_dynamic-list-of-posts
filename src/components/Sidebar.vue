@@ -129,11 +129,13 @@ export default {
   props: {
     isOpen: {
       type: Boolean,
-      required: true
+      required: true,
+      validator: (value) => typeof value === 'boolean'
     },
     post: {
       type: Object,
-      default: null
+      default: null,
+      validator: (value) => value === null || typeof value === 'object'
     }
   },
   emits: ['close', 'post-updated'],

@@ -28,8 +28,16 @@ export default {
     Sidebar
   },
   props: {
-    isSidebarOpen: Boolean,
-    selectedPost: Object
+    isSidebarOpen: {
+      type: Boolean,
+      required: true,
+      validator: (value) => typeof value === 'boolean'
+    },
+    selectedPost: {
+      type: Object,
+      default: null,
+      validator: (value) => value === null || typeof value === 'object'
+    }
   },
   emits: ['open-post', 'edit-post', 'open-new-post', 'close-sidebar', 'post-updated'],
   setup(props, { emit }) {
